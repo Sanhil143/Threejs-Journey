@@ -13,8 +13,16 @@ const cube = new Three.Mesh(cubeGeometry,cubeMaterial);
 cube.position.x = -5
 cube.position.y = -5
 cube.position.z = -5
-console.log(cube.position.length());  //return 8.660254037844387 orgin ----distance---- cube
+console.log(cube.position.length());  //return  orgin ----distance---- cube
 scene.add(cube);
+
+
+const sphereGeometry = new Three.SphereGeometry(1,10,10);
+const sphereMaterial = new Three.MeshBasicMaterial({color:'yellow'});
+const sphere =  new Three.Mesh(sphereGeometry,sphereMaterial);
+sphere.position.x = 10
+scene.add(sphere)
+console.log(sphere.position.distanceTo(cube.position)); //return cube and sphere distance
 camera.position.z = 15;
 
 renderer.render(scene,camera)
