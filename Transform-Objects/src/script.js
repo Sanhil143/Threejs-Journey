@@ -1,38 +1,59 @@
 import * as Three from "three";
 
-
 const canvas = document.querySelector("canvas.webgl");
 const scene = new Three.Scene();
-const renderer = new Three.WebGLRenderer({canvas:canvas});
-renderer.setSize(window.innerWidth, window.innerHeight)
-const camera = new Three.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1,1000)
+const renderer = new Three.WebGLRenderer({ canvas: canvas });
+renderer.setSize(window.innerWidth, window.innerHeight);
+const camera = new Three.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
 
-const cubeGeometry = new Three.BoxGeometry(1,1,1);
-const cubeMaterial = new Three.MeshBasicMaterial({color:'white'});
-const cube = new Three.Mesh(cubeGeometry,cubeMaterial);
-cube.position.x = 1
-cube.position.y = -3
-cube.position.z = 3
-console.log(cube.position.length());  //return  orgin ----distance---- cube
-scene.add(cube);
+const sphere = new Three.Mesh(
+  new Three.SphereGeometry(1, 10, 10),
+  new Three.MeshBasicMaterial({ color: "yellow", wireframe: true })
+);
+const sphere1 = new Three.Mesh(
+  new Three.SphereGeometry(1, 10, 10),
+  new Three.MeshBasicMaterial({ color: "skyblue", wireframe: true })
+);
+const sphere2 = new Three.Mesh(
+  new Three.SphereGeometry(1, 10, 10),
+  new Three.MeshBasicMaterial({ color: "skyblue", wireframe: true })
+);
+const sphere3 = new Three.Mesh(
+  new Three.SphereGeometry(1, 10, 10),
+  new Three.MeshBasicMaterial({ color: "red", wireframe: true })
+);
+const sphere4 = new Three.Mesh(
+  new Three.SphereGeometry(1, 10, 10),
+  new Three.MeshBasicMaterial({ color: "red", wireframe: true })
+);
 
-// cube.position.normalize();
-console.log(cube.position.length());  //return  orgin ----distance---- cube
+sphere1.position.x = -3;
+sphere2.position.x = 3;
+sphere3.position.y = 3;
+sphere4.position.y = -3;
 
+camera.position.z = 7;
 
-const sphereGeometry = new Three.SphereGeometry(1,10,10);
-const sphereMaterial = new Three.MeshBasicMaterial({color:'yellow'});
-const sphere =  new Three.Mesh(sphereGeometry,sphereMaterial);
-sphere.position.x = 10
-scene.add(sphere)
-console.log(sphere.position.distanceTo(cube.position)); //return cube and sphere distance
+const group = new Three.Group();
+scene.add(group);
+group.rotation.reorder("YXZ");
+group.add(sphere);
+group.add(sphere1);
+group.add(sphere2);
+group.add(sphere3);
+group.add(sphere4);
 
-const axisHelper = new Three.AxesHelper(5);
-axisHelper.position.copy(cube.position)
-scene.add(axisHelper)
+const animate = () => {
+  
+  group.rotation.y += 0.01;
+  group.rotation.x += 0.1;
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+};
 
-
-
-camera.position.z = 15;
-
-renderer.render(scene,camera)
+animate();
