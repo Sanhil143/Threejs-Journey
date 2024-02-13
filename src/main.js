@@ -1,4 +1,4 @@
-import Scene from './scene/transformObject';
+import Scene from './scene/gui';
 
 window.addEventListener('DOMContentLoaded', () => {
   const canvas = document.querySelector('canvas.webgl');
