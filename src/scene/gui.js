@@ -13,9 +13,6 @@ export default class GuiScene extends Engine{
     this.cubeControl.add(this.cube.position,'x').min(-3).max(3).step(0.1)
 
     this.camera.z = 15
-    this.controls = new OrbitControls(this.canvas,this.camera);
   }
-  update(){
-    this.controls.update()
-  }
+  update(){}
 }
