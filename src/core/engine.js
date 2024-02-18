@@ -46,8 +46,8 @@ export default class Engine {
       if (!fullScreenElement) {
         if (this.canvas.requestFullscreen) {
           this.canvas.requestFullscreen();
-        } else if (this.canvas.webkitFullScreenElement) {
-          this.canvas.webkitFullScreenElement();
+        } else if (this.canvas.webkitRequestFullScreenElement) {
+          this.canvas.webkitRequestFullScreenElement();
         }
       } else {
         if (document.exitFullscreen) {
@@ -60,7 +60,7 @@ export default class Engine {
   }
 
   setupOrbitControl() {
-    this.orbitControl = new OrbitControls(this.canvas, this.camera);
+    this.orbitControl = new OrbitControls( this.camera,this.canvas);
     this.orbitControl.enableDamping = true;
   }
 }
