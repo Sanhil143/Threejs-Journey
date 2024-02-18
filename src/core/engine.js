@@ -17,6 +17,8 @@ export default class Engine {
       1000
     );
     this.renderer = new Three.WebGLRenderer({ canvas: this.canvas });
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
     this.resize();
     this.fullSize();
     this.setupOrbitControl();
@@ -46,14 +48,14 @@ export default class Engine {
       if (!fullScreenElement) {
         if (this.canvas.requestFullscreen) {
           this.canvas.requestFullscreen();
-        } else if (this.canvas.webkitRequestFullScreenElement) {
-          this.canvas.webkitRequestFullScreenElement();
+        } else if (this.canvas.webkitRequestFullScreen) {
+          this.canvas.webkitRequestFullScreen();
         }
       } else {
         if (document.exitFullscreen) {
           document.exitFullscreen();
-        } else if (document.webkitFullScreenElement) {
-          document.webkitExitFullScreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
         }
       }
     });
