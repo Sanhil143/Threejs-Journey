@@ -63,6 +63,6 @@ export default class Engine {
 
   setupOrbitControl() {
     this.orbitControl = new OrbitControls( this.camera,this.canvas);
-    this.orbitControl.enableDamping = true;
+    this.orbitControl.enableDamping = false;
   }
 }
